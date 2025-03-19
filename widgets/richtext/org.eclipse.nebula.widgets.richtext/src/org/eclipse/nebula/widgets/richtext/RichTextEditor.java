@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2015, 2022 CEA LIST.
+ * Copyright (c) 2015, 2025 CEA LIST.
  *
  *
  * This program and the accompanying materials
@@ -754,7 +754,7 @@ public class RichTextEditor extends Composite {
 			embeddedShell.setVisible(true);
 		}
 		else {
-			super.setBounds(newX, newY, newWidth, newHeight);
+			super.setBounds(new Rectangle(newX, newY, newWidth, newHeight));
 		}
 	}
 
