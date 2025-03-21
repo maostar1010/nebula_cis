@@ -79,6 +79,7 @@ public class RichTextEditor extends Composite {
 	private boolean editorLoaded = false;
 	private String initialValue = null;
 	private boolean initialSetFocus = false;
+	private boolean initialSetEditable = true;
 
 	protected Rectangle resizedBounds = null;
 
@@ -476,8 +477,12 @@ public class RichTextEditor extends Composite {
 	 *
 	 */
 	public boolean isEditable() {
-		final Object result = browser.evaluate("return isEditable()");
-		return result != null ? !Boolean.valueOf(result.toString()) : true;
+		if (editorLoaded) {
+			final Object result = browser.evaluate("return isEditable()");
+			return result != null ? !Boolean.valueOf(result.toString()) : true;
+		} else {
+			return initialSetEditable;
+		}
 	}
 
 	/**
@@ -505,7 +510,15 @@ public class RichTextEditor extends Composite {
 	 *            the new editable state
 	 */
 	public void setEditable(final boolean editable) {
-		browser.evaluate("setReadOnly(" + !editable + ")");
+		if (editorLoaded) {
+			browser.evaluate("setReadOnly(" + !editable + ")");
+		}
+		else {
+			// initial readOnly mode can only be enabled via configuration option as described in
+			// https://ckeditor.com/docs/ckeditor4/latest/features/readonly.html#read-only-mode-on-startup
+			initialSetEditable = false;
+			editorConfig.setOption("readOnly", true);
+		}
 	}
 
 	/**
