@@ -155,7 +155,8 @@ public class RichTextEditorExample {
 		});
 
 		final Button enableButton = new Button(buttonPanel, SWT.PUSH);
-		enableButton.setText("Disable");
+		boolean editable = editor.isEditable();
+		enableButton.setText(!editable ? "Enable" : "Disable");
 		enableButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
