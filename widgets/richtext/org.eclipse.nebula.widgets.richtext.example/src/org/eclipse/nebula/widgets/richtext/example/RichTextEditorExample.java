@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2015, 2020 CEA LIST.
+ * Copyright (c) 2015, 2025 CEA LIST.
  *
  *
  * This program and the accompanying materials
@@ -13,6 +13,8 @@
  *		Dirk Fauth <dirk.fauth@googlemail.com> - Initial API and implementation
  *****************************************************************************/
 package org.eclipse.nebula.widgets.richtext.example;
+
+import java.util.Locale;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -65,7 +67,11 @@ public class RichTextEditorExample {
 	public void createControls(Composite parent) {
 		parent.setLayout(new GridLayout(1, true));
 
-		final RichTextEditor editor = new RichTextEditor(parent);
+		RichTextEditorConfiguration editorConfig = new RichTextEditorConfiguration();
+		editorConfig.setEnableNativeSpellChecker(true);
+		editorConfig.setLanguage(Locale.ENGLISH);
+		final RichTextEditor editor = new RichTextEditor(parent, editorConfig);
+		
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(editor);
 
 		final Text htmlOutput = new Text(parent,
@@ -94,7 +100,7 @@ public class RichTextEditorExample {
 				RichTextEditorExample.class.getResource("images/environment_co.gif")) {
 			@Override
 			public String getJavascriptToExecute() {
-				return "alert('Javascript call')";
+				return "alert('Javascript call - navigator.userAgent:\\n\\n' + navigator.userAgent)";
 			}
 		});
 

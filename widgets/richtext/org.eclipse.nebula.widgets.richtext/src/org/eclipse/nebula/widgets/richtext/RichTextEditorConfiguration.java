@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2016, 2022 Dirk Fauth.
+ * Copyright (c) 2016, 2025 Dirk Fauth.
  *
  *
  * This program and the accompanying materials
@@ -94,7 +94,12 @@ public class RichTextEditorConfiguration {
 	 * using the resize handle..
 	 */
 	public static final String RESIZE_MINHEIGHT = "resize_minHeight";
-
+	/**
+	 * Key to configure whether to enable the resizing feature.
+	 * @since 1.6
+	 */
+	public static final String DISABLE_NATIVE_SPELL_CHECKER = "disableNativeSpellChecker";
+	
 	/**
 	 * Collection of languages that are supported by CKEditor.
 	 */
@@ -670,5 +675,16 @@ public class RichTextEditorConfiguration {
 	 */
 	public void setAutoUrlFormattingDisabled(boolean autoUrlFormattingDisabled) {
 		this.autoUrlFormattingDisabled = autoUrlFormattingDisabled;
+	}
+	
+	/**
+	 * Whether to enable the native spell checking feature.
+	 *
+	 * @param enable
+	 *            <code>true</code> to enable the native spell checking.
+	 *  @since 1.6
+	 */
+	public void setEnableNativeSpellChecker(boolean enable) {
+		this.options.put(DISABLE_NATIVE_SPELL_CHECKER, !enable);
 	}
 }
